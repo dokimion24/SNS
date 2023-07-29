@@ -25,7 +25,7 @@ export default {
     },
     {
       title: 'Following',
-      name: 'follwing',
+      name: 'following',
       type: 'array',
       of: [
         {
