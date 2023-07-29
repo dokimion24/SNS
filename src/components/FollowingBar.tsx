@@ -3,6 +3,7 @@ import { DetailUser } from '@/model/user';
 import Link from 'next/link';
 import { PropagateLoader } from 'react-spinners';
 import useSWR from 'swr';
+import ScrollableBar from './ScrollableBar';
 import Avatar from './Avatar';
 
 export default function FollowingBar() {
@@ -22,20 +23,19 @@ export default function FollowingBar() {
         (!users || users.length === 0) && <p>{`You don't have following`}</p>
       )}
       {users && users.length > 0 && (
-        <ul className='w-full flex gap-2'>
+        <ScrollableBar>
           {users.map(({ image, username }) => (
-            <li key={username}>
-              <Link
-                className='flex flex-col items-center w-20'
-                href={`/user/${username}`}>
-                <Avatar image={image} highlight />
-                <p className='w-full text-sm text-center text-ellipsis overflow-hidden'>
-                  {username}
-                </p>
-              </Link>
-            </li>
+            <Link
+              key={username}
+              className='flex flex-col items-center w-20'
+              href={`/user/${username}`}>
+              <Avatar image={image} highlight />
+              <p className='w-full text-sm text-center text-ellipsis overflow-hidden'>
+                {username}
+              </p>
+            </Link>
           ))}
-        </ul>
+        </ScrollableBar>
       )}
     </section>
   );
