@@ -3,6 +3,7 @@ import NextAuth, { NextAuthOptions } from 'next-auth';
 import GoogleProvider from 'next-auth/providers/google';
 
 export const authOptions: NextAuthOptions = {
+  secret: process.env.NEXTAUTH_SECRET,
   // Configure one or more authentication providers
   providers: [
     GoogleProvider({
@@ -29,6 +30,7 @@ export const authOptions: NextAuthOptions = {
       return true;
     },
     async session({ session }) {
+      console.log('session', session);
       const user = session?.user;
       if (user) {
         session.user = {
