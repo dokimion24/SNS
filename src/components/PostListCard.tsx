@@ -1,12 +1,14 @@
+'use client';
+
 import { SimplePost } from '@/model/post';
-import React from 'react';
+import React, { useState } from 'react';
 import Avatar from './Avatar';
 import Image from 'next/image';
-import HeadertIcon from './ui/icons/HeartIcon';
-import BookmarkIcon from './ui/icons/BookmarkIcon';
-import { parseDate } from '@/util/date';
+
 import CommentForm from './CommentForm';
 import ActionBar from './ActionBar';
+import PostModal from './PostModal';
+import ModalPortal from './ui/ModalPortal';
 
 type Props = {
   post: SimplePost;
@@ -16,6 +18,8 @@ type Props = {
 export default function PostListCard({ post, priority = false }: Props) {
   const { userImage, username, image, createdAt, likes, text } = post;
 
+  const [showModal, setShowModal] = useState(false);
+
   return (
     <article className='rounded-lg shadow-md border border-gray-200'>
       <div className='flex items-center p-2'>
@@ -23,6 +27,7 @@ export default function PostListCard({ post, priority = false }: Props) {
         <span className='text-gray-900 font-bold ml-2'>{username}</span>
       </div>
       <Image
+        onClick={() => setShowModal(true)}
         className='w-full object-cover aspect-square'
         src={image}
         alt={`photo by ${username}`}
@@ -30,6 +35,7 @@ export default function PostListCard({ post, priority = false }: Props) {
         height={500}
         priority={priority}
       />
+
       <ActionBar
         likes={likes}
         createdAt={createdAt}
@@ -37,6 +43,13 @@ export default function PostListCard({ post, priority = false }: Props) {
         username={username}
       />
       <CommentForm />
+      {showModal && (
+        <ModalPortal>
+          <PostModal onClose={() => setShowModal(false)}>
+            <p>상세페이지!!!!</p>
+          </PostModal>
+        </ModalPortal>
+      )}
     </article>
   );
 }
