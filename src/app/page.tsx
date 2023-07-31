@@ -10,7 +10,6 @@ export default async function HomePage() {
   const session = await getServerSession(authOptions);
   const user = session?.user;
 
-  console.log('유저', user);
 
   if (!user) {
     redirect('/auth/signin');
