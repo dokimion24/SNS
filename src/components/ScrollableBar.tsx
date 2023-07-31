@@ -7,7 +7,7 @@ const responsive = {
   },
   mobile: {
     breakpoint: { max: 576, min: 0 },
-    items: 5,
+    items: 4,
   },
 };
 
@@ -18,7 +18,9 @@ export default function ScrollableBar({
 }: {
   children: React.ReactNode;
 }) {
-  return <Carousel
-  containerClass='w-full flex gap-2'
-  responsive={responsive}>{children}</Carousel>;
+  return (
+    <Carousel containerClass='w-full flex gap-2' responsive={responsive}>
+      {children}
+    </Carousel>
+  );
 }
