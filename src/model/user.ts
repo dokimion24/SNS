@@ -12,3 +12,8 @@ export type DetailUser = User & {
   follwers: SimpleUser[];
   bookmarks: string[];
 };
+
+export type UserSearchResult = User & {
+  following: number;
+  followers: number;
+};
