@@ -9,6 +9,8 @@ import CommentForm from './CommentForm';
 import ActionBar from './ActionBar';
 import PostModal from './PostModal';
 import ModalPortal from './ui/ModalPortal';
+import PostDetail from './PostDetail';
+import PostUserAvatar from './PostUserAvatar';
 
 type Props = {
   post: SimplePost;
@@ -22,10 +24,7 @@ export default function PostListCard({ post, priority = false }: Props) {
 
   return (
     <article className='rounded-lg shadow-md border border-gray-200'>
-      <div className='flex items-center p-2'>
-        <Avatar image={userImage} size='medium' highlight />
-        <span className='text-gray-900 font-bold ml-2'>{username}</span>
-      </div>
+      <PostUserAvatar userImage={userImage} username={username} />
       <Image
         onClick={() => setShowModal(true)}
         className='w-full object-cover aspect-square'
@@ -46,7 +45,7 @@ export default function PostListCard({ post, priority = false }: Props) {
       {showModal && (
         <ModalPortal>
           <PostModal onClose={() => setShowModal(false)}>
-            <p>상세페이지!!!!</p>
+            <PostDetail post={post} />
           </PostModal>
         </ModalPortal>
       )}
