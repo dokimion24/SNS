@@ -6,21 +6,22 @@ import GridSpinner from './ui/GridSpinner';
 import Avatar from './Avatar';
 import { UserSearchResult } from '@/model/user';
 import UserCard from './UserCard';
+import useDebounce from '@/hooks/useDebounce';
 
 export default function UserSearch() {
   const [keyword, setKeyword] = useState('');
-
+  const debouncedSearch = useDebounce(keyword);
   const {
     data: users,
     isLoading,
     error,
-  } = useSWR<UserSearchResult[]>(`/api/search/${keyword}`);
+  } = useSWR<UserSearchResult[]>(() => `/api/search/${debouncedSearch}`);
 
   const onSubmit = (e: FormEvent) => {
     e.preventDefault();
   };
 
-  return ( 
+  return (
     <section className='w-full flex flex-col items-center max-w-2xl my-4'>
       <form onSubmit={onSubmit} className='w-full'>
         <input
