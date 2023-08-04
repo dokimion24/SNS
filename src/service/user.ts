@@ -23,10 +23,13 @@ export async function addUser({ username, id, email, image, name }: OAuthUser) {
 
 export async function getUserByUsername(username: string) {
   return client.fetch(
-    `*[_type == "user" && username == "${username}"]{
+    `*[_type == "user" && username == "${username}"][0]{
       ...,
       following[]->{username,image},
       followers[]->{username,image},
+      "followingNum": count(following),
+      "followersNum": count(followers),
+      "posts": count(*[_type=="post" && author->username == "${username}"]),
       "bookmarks":bookmarks[]->_id
       }`
   );
@@ -44,23 +47,4 @@ export async function searchUsers(keyword?: string) {
       "followers": count(followers)
     }`
   );
-}
-
-export async function getUserForProfile(username: string) {
-  return client
-    .fetch(
-      ` *[_type == "user" && username == "${username}}[0]{
-      ...,
-      "id":_id,
-      "following": count(following),
-      "followers": count(followers),
-      "posts": count(*[_type=="post" && author->username == ${username}])
-    }`
-    )
-    .then((user) => ({
-      ...user,
-      following: user.following ?? 0,
-      followers: user.followers ?? 0,
-      post: user.post ?? 0,
-    }));
 }
