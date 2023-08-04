@@ -1,9 +1,7 @@
 'use client';
 
 import { SimplePost } from '@/model/post';
-import { User } from '@/model/user';
 import React from 'react';
-import { GridLoader } from 'react-spinners';
 import useSWR from 'swr';
 import PostListCard from './PostListCard';
 import GridSpinner from './ui/GridSpinner';
