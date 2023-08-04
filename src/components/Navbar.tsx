@@ -60,6 +60,7 @@ export default function Navbar() {
           )}
           {session ? (
             <ColorButton
+              color='bg-black'
               text='Sign out'
               onClick={() => {
                 signOut();
@@ -67,6 +68,7 @@ export default function Navbar() {
             />
           ) : (
             <ColorButton
+              color='bg-black'
               text='Sign in'
               onClick={() => {
                 signIn();
