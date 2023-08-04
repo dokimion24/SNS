@@ -2,11 +2,11 @@
 
 import React from 'react';
 import Avatar from './Avatar';
-import { UserSearchResult } from '@/model/user';
+import { SearchUser } from '@/model/user';
 import Link from 'next/link';
 
 type Props = {
-  user: UserSearchResult;
+  user: SearchUser;
 };
 
 export default function UserCard({ user }: Props) {

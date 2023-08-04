@@ -4,7 +4,7 @@ import React, { FormEvent, useState } from 'react';
 import useSWR from 'swr';
 import GridSpinner from './ui/GridSpinner';
 import Avatar from './Avatar';
-import { UserSearchResult } from '@/model/user';
+import { SearchUser } from '@/model/user';
 import UserCard from './UserCard';
 import useDebounce from '@/hooks/useDebounce';
 
@@ -15,7 +15,7 @@ export default function UserSearch() {
     data: users,
     isLoading,
     error,
-  } = useSWR<UserSearchResult[]>(() => `/api/search/${debouncedSearch}`);
+  } = useSWR<SearchUser[]>(() => `/api/search/${debouncedSearch}`);
 
   const onSubmit = (e: FormEvent) => {
     e.preventDefault();
