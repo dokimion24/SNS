@@ -30,25 +30,30 @@ export default function UserProfile() {
   ];
 
   return (
-    <section>
+    <section
+      className="w-full flex flex-col md:flex-row items-center justify-center py-12
+      border-b border-neutral-300"
+    >
       {isLoading && (
-        <div className='text-center mt-32'>
+        <div className="text-center mt-32">
           <GridSpinner />
         </div>
       )}
       <Avatar image={image} highlight />
-      <div>
-        <h1>{username}</h1>
-        <FollowButton user={user} />
-        <ul>
+      <div className="md:ml-10 basis-1/3">
+        <div className="flex flex-col items-center md:flex-row">
+          <h1 className="text-2xl md:mr-8 my-2 md:mb-0">{username}</h1>
+          <FollowButton user={user} />
+        </div>
+        <ul className="my-4 flex gap-4">
           {info.map((item, index) => (
             <li key={index}>
-              <span>{item.data}</span>
+              <span className="font-bold mr-1">{item.data}</span>
               {item.title}
             </li>
           ))}
         </ul>
-        <p>{name}</p>
+        <p className="text-xl font-bold text-center md:text-start">{name}</p>
       </div>
     </section>
   );
